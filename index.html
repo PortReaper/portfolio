@@ -1,188 +1,328 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Kumar Singh - Resume</title>
+    <title>Ayush Kumar Singh | Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
-        }
-        h1, h2, h3, h4 {
-            color: #222;
-            margin-top: 0;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 0.2em;
-        }
-        .contact-info {
-            text-align: center;
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 2em;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 1em;
-        }
-        .contact-info a {
-            color: #4682B4; /* SteelBlue */
-            text-decoration: none;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-        .section-title {
-            font-size: 1.4em;
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.3em;
-            margin-bottom: 1em;
-        }
-        .job-title {
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-        .company-info {
-            display: flex;
-            justify-content: space-between;
-            font-style: italic;
-            color: #666;
-            margin-bottom: 0.5em;
-        }
-        ul {
-            padding-left: 20px;
-            margin-top: 0.5em;
-        }
-        li {
-            margin-bottom: 0.5em;
-        }
-        strong {
-            font-weight: bold;
-        }
-        .skills-section ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .skills-section li {
-            margin-bottom: 0.7em;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        :root { --bg: #0f172a; --text-main: #f8fafc; --text-dim: #94a3b8; --accent: #f97316; --glass: rgba(15, 23, 42, 0.95); }
+        body.light-theme { --bg: #f8fafc; --text-main: #0f172a; --text-dim: #475569; --accent: #0891b2; --glass: rgba(248, 250, 252, 0.95); }
+
+        body { font-family: 'Inter', sans-serif; cursor: none; background-color: var(--bg); color: var(--text-main); transition: background-color 0.3s ease, color 0.3s ease; }
+        
+        #starCanvas, #clickCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        body.light-theme #starCanvas { opacity: 0; }
+
+        #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; }
+        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 999; transition: transform 0.15s ease-out; opacity: 0.5; }
+
+        .glass-nav { background: var(--glass); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(128, 128, 128, 0.1); z-index: 500; }
+        .accent-text { color: var(--accent); }
+        .accent-bg { background-color: var(--accent); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        .skill-chip { background: rgba(128, 128, 128, 0.1); border: 1px solid rgba(128, 128, 128, 0.2); padding: 0.5rem 0.8rem; border-radius: 6px; font-size: 0.7rem; transition: all 0.3s; }
+        .skill-chip:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+        
+        /* Persistent Right Sidebar */
+        .right-edge-socials { position: fixed; right: 1.5rem; bottom: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        .right-edge-socials::after { content: ""; width: 1px; height: 90px; background-color: var(--text-dim); }
+
+        section { position: relative; z-index: 10; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Ayush Kumar Singh</h1>
-            <div class="contact-info">
-                Software Engineer <br>
-                Greater Noida, India | +91-9455963915 | <a href="mailto:singh09ayushkumar@gmail.com">singh09ayushkumar@gmail.com</a> | <a href="#">LinkedIn</a> | <a href="#">GitHub</a>
-            </div>
-        </header>
+<body class="antialiased overflow-x-hidden">
 
-        <section id="summary">
-            <h2 class="section-title">Summary</h2>
-            <p>Results-driven Software Engineer with 2.3 years of experience at Nucleus Software, specializing in building robust automation frameworks and development tools within the FinTech sector. Proven ability to enhance software quality and team productivity by developing Java-based utilities, implementing CI/CD pipelines, and creating cross-platform services. Recipient of the SPOT Award for significant contributions to the ATDD framework. Eager to apply strong problem-solving skills and a passion for scalable software solutions to a challenging role at a leading technology company.</p>
-        </section>
+    <canvas id="starCanvas"></canvas>
+    <canvas id="clickCanvas"></canvas>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
 
-        <section id="experience">
-            <h2 class="section-title">Experience</h2>
-            <div>
-                <p class="job-title">Software Engineer</p>
-                <div class="company-info">
-                    <span><strong>Nucleus Software Exports Ltd.</strong> | Noida, India</span>
-                    <span><em>June 2023 – Present</em></span>
-                </div>
-                <ul>
-                    <li>Developed and maintained a comprehensive automation framework using <strong>Java, Selenium, Playwright, and Cucumber</strong>, significantly reducing manual testing efforts and increasing test coverage.</li>
-                    <li>Engineered a suite of Java-based utilities that automated repetitive testing tasks, leading to a substantial reduction in overall test execution time and improving team productivity.</li>
-                    <li>Designed and deployed an embedded server for real-time monitoring of test executions, improving debugging efficiency and providing instant feedback to developers.</li>
-                    <li>Created a user-friendly Swing UI for internal automation tools, simplifying access for non-technical team members and streamlining the onboarding process for new engineers.</li>
-                    <li>Built a cross-platform command execution service, enabling seamless remote operations across <strong>Windows, Linux, and macOS</strong>, which provided greater flexibility for our distributed development teams.</li>
-                    <li>Implemented and managed <strong>CI/CD pipelines using Jenkins</strong>, automating the build, testing, and deployment process for multiple projects, ensuring consistent and reliable software delivery.</li>
-                </ul>
-            </div>
-            <div style="margin-top: 1.5em;">
-                <p class="job-title">Cyber Security Intern</p>
-                <div class="company-info">
-                    <span><strong>Cisco Networking Academy</strong> | Virtual</span>
-                    <span><em>June 2022 – July 2022</em></span>
-                </div>
-                <ul>
-                    <li>Completed a virtual internship focused on Cyber Security essentials and network configuration.</li>
-                    <li>Designed a secure, multi-layered network infrastructure for a campus environment using <strong>Cisco Packet Tracer</strong>, incorporating best practices for network security and threat mitigation.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2 class="section-title">Projects</h2>
-            <div>
-                <h4>Distributed Testing Framework</h4>
-                <ul>
-                    <li>Designed and developed a queue-based, pull-based distributed framework to execute test scenarios concurrently across multiple client nodes.</li>
-                    <li>Engineered the system to ensure high availability and fault tolerance, allowing for robust, parallel test execution in a distributed environment.</li>
-                    <li>Utilized messaging queues for efficient task distribution and management, optimizing resource utilization and scalability.</li>
-                </ul>
-            </div>
-             <div>
-                <h4>Automation Testing Framework Development</h4>
-                <ul>
-                    <li>Led the design and implementation of a modular and scalable testing framework from the ground up using <strong>Java and TestNG</strong>.</li>
-                    <li>Integrated support for both UI (Selenium) and API testing, creating a unified solution for end-to-end validation.</li>
-                    <li>Incorporated features like detailed reporting, parallel execution, and seamless integration with CI/CD pipelines.</li>
-                </ul>
-            </div>
-            <div>
-                <h4>IoT Based Smart Bin</h4>
-                <ul>
-                    <li>Developed a voice-controlled smart dustbin utilizing <strong>NLP (Naive Bayes, HMMs) and Python on a Raspberry Pi</strong>.</li>
-                    <li>Features include automatic lid operation, real-time fill-level monitoring via sensors, and automated alerts to sanitation authorities when full.</li>
-                    <li>The project won a <strong>Silver Medal at Spark 2021</strong>, was selected for incubation by IIEC-IPEC, and the concept was published by Intellectual Property India.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="skills" class="skills-section">
-            <h2 class="section-title">Technical Skills</h2>
-            <ul>
-                <li><strong>Languages:</strong> Java, C++, Python, SQL, JavaScript, HTML/CSS</li>
-                <li><strong>Automation Frameworks:</strong> Selenium, Playwright, Cucumber, TestNG, JUnit</li>
-                <li><strong>DevOps & CI/CD:</strong> Jenkins, Docker, Git, SVN</li>
-                <li><strong>Tools & Technologies:</strong> Kafka, MySQL, Apache POI, Embedded Servers, Swing UI</li>
-                <li><strong>Core Concepts:</strong> Data Structures & Algorithms, DBMS, Computer Networks, SDLC, Automation Testing</li>
-            </ul>
-        </section>
-
-        <section id="achievements">
-            <h2 class="section-title">Achievements & Leadership</h2>
-            <ul>
-                <li><strong>Competitive Programming:</strong> Solved <strong>900+</strong> problems on platforms like LeetCode, GeeksforGeeks, and HackerRank (<strong>5-star in Problem Solving</strong>).</li>
-                <li><strong>SPOT Award Recipient:</strong> Recognized for exceptional contributions and innovation within the ATDD framework team at Nucleus Software.</li>
-                <li><strong>Vice-President, IIEC-IPEC:</strong> Led the Innovation Incubation & Entrepreneurship Cell at Inderprastha Engineering College, fostering a culture of innovation among students.</li>
-            </ul>
-        </section>
-
-        <section id="education">
-            <h2 class="section-title">Education</h2>
-            <p class="job-title">Inderprastha Engineering College | Ghaziabad, India</p>
-            <p><em>Bachelor of Technology in Computer Science and Engineering</em> | Graduated: May 2023</p>
-            <ul>
-                <li>CGPA: 8.39/10</li>
-            </ul>
-        </section>
-
+    <div class="right-edge-socials hidden lg:flex">
+        <a href="https://github.com/PortReaper" target="_blank" class="text-dim hover:accent-text text-xl transition-all cursor-hover"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ayush-kumar-singh-a40937188/" target="_blank" class="text-dim hover:accent-text text-xl transition-all cursor-hover"><i class="fab fa-linkedin"></i></a>
+	<a href="https://www.instagram.com/ayush_the_one.90/" target="_blank" class="cursor-hover hover:accent-text transition-all"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:singh09ayushkumar@gmail.com" class="text-dim hover:accent-text text-xl transition-all cursor-hover mb-4"><i class="far fa-envelope"></i></a>
     </div>
+
+    <nav class="fixed w-full glass-nav py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <span class="text-2xl font-extrabold tracking-tighter cursor-hover uppercase">Ayush<span class="accent-text">.</span></span>
+            <div class="flex items-center space-x-6">
+                <div class="hidden lg:flex space-x-8 font-medium text-xs tracking-widest uppercase">
+                    <a href="#experience" class="hover:accent-text transition cursor-hover">Experience</a>
+                    <a href="#skills" class="hover:accent-text transition cursor-hover">Skills</a>
+                    <a href="#projects" class="hover:accent-text transition cursor-hover">Projects</a>
+		    <a href="#education" class="hover:accent-text transition cursor-hover">Education</a>		
+                    <a href="#contact" class="hover:accent-text transition cursor-hover">Contact</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2 rounded-full border border-slate-700 cursor-hover transition px-3">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <a href="Ayush_SDE[3y].pdf" download class="accent-text border border-orange-500 px-4 py-1.5 rounded hover:accent-bg hover:text-white transition text-xs font-bold cursor-hover uppercase">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center justify-center pt-24 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-24">
+            <div class="md:w-3/5 text-center md:text-left" data-aos="fade-right">
+                <p class="accent-text font-mono mb-2 tracking-widest uppercase text-sm font-bold">Software Development Engineer</p>
+                <h1 class="text-5xl lg:text-7xl font-bold mb-6">Ayush Kumar Singh</h1>
+                <p class="text-dim text-lg max-w-xl mb-8 leading-relaxed">
+                    Software Engineer with 3 years of experience at Nucleus Software Exports Ltd., contributing to the FinnOne Neo® CAS product, Skilled in Java, Spring, Spring Boot, Hibernate. Recipient of the SPOT Award for innovation in automation frameworks.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="Ayush_SDE[3y].pdf" download class="cursor-hover accent-bg text-white px-7 py-3.5 rounded-lg font-bold shadow-lg transition-all flex items-center gap-2">
+                        <i class="fas fa-file-download"></i> Download Resume
+                    </a>
+                    <!-- <a href="Ayush_SDE[3y].pdf" download class="cursor-hover border border-slate-700 px-7 py-3.5 rounded-lg font-bold transition-all">
+                        Cover Page
+                    </a> -->
+                </div>
+            </div>
+            <div class="md:w-2/5 flex justify-center" data-aos="zoom-in">
+                <div class="relative animate-float">
+                    <img src="1000168544.jpg" alt="Ayush Kumar Singh" class="w-72 h-80 lg:w-80 lg:h-96 object-cover rounded-2xl border-4 border-orange-500 shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-24 px-6 bg-slate-900/10">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold mb-16 flex items-center gap-4" data-aos="fade-up">
+                <span class="accent-text">01.</span> Professional Experience
+                <div class="h-[1px] bg-slate-700 flex-grow"></div>
+            </h2>
+            <div class="space-y-12">
+                <div class="border-l-2 accent-border pl-8" data-aos="fade-left">
+                    <h3 class="text-xl font-bold">Software Engineer</h3>
+                    <p class="accent-text font-medium">Nucleus Software Exports Ltd., Noida</p>
+                    <p class="text-dim text-sm mb-4">June 2023 – Present</p>
+                    <ul class="text-dim text-sm space-y-2 list-disc ml-4 leading-relaxed">
+                        <li>Developer on FinnOne Neo CAS, focusing on lead management, application processing, and automation modules.</li>
+                        <li>Maintained Spring Boot microservices with Hibernate, REST APIs, and GraphQL integrations.</li>
+                        <li>Built Java-Selenium-Playwright-Cucumber frameworks, reducing manual testing effort.</li>
+                        <li>Implemented CI/CD pipelines with Jenkins, Docker, and Kubernetes.</li>
+                        <li>Designed monitoring dashboards using FTL and JSP.</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 accent-border pl-8 opacity-80" data-aos="fade-left">
+                    <h3 class="text-xl font-bold">Cyber Security Intern</h3>
+                    <p class="accent-text font-medium">Cisco Networking Academy (Virtual)</p>
+                    <p class="text-dim text-sm mb-4">June 2021 – July 2021</p>
+                    <p class="text-dim text-sm">Designed a multi-layered secure campus network implementing cybersecurity best practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="skills" class="py-24 px-6 bg-slate-900/10">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold mb-16 flex items-center gap-4" data-aos="fade-up">
+                <span class="accent-text">02.</span> Technical Arsenal
+                <div class="h-[1px] bg-slate-700 flex-grow"></div>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div data-aos="fade-up">
+                    <h3 class="text-xs font-bold mb-6 accent-text uppercase tracking-widest">Languages</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip">Java</span> <span class="skill-chip">C++</span> <span class="skill-chip">Python</span> <span class="skill-chip">SQL</span> <span class="skill-chip">JavaScript</span>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xs font-bold mb-6 accent-text uppercase tracking-widest">Frameworks & Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip">Spring</span> <span class="skill-chip">Spring Boot</span> <span class="skill-chip">Hibernate</span> <span class="skill-chip">REST Assured</span> <span class="skill-chip">Selenium</span> <span class="skill-chip">Playwright</span> <span class="skill-chip">Appium</span> <span class="skill-chip">Cucumber</span> <span class="skill-chip">TestNG</span> <span class="skill-chip">Node.js</span>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xs font-bold mb-6 accent-text uppercase tracking-widest">DevOps & Cloud</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip">Jenkins</span> <span class="skill-chip">CI/CD</span> <span class="skill-chip">Grafana</span> <span class="skill-chip">Docker</span> <span class="skill-chip">Kubernetes</span> <span class="skill-chip">Git</span> <span class="skill-chip">GitLab</span> <span class="skill-chip">Maven</span>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xs font-bold mb-6 accent-text uppercase tracking-widest">Technologies</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip">Kafka</span> <span class="skill-chip">MySQL</span> <span class="skill-chip">GraphQL</span> <span class="skill-chip">SSL/TLS</span> <span class="skill-chip">DSA</span> <span class="skill-chip">DBMS</span> <span class="skill-chip">SDLC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6">
+    <div class="container mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold mb-16 flex items-center gap-4" data-aos="fade-up">
+            <span class="accent-text">03.</span> Projects & Innovation
+            <div class="h-[1px] bg-slate-700 flex-grow"></div>
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-800/20 p-8 rounded-xl border border-slate-800 hover:accent-border transition-all flex flex-col" data-aos="zoom-in">
+                <div class="flex justify-between items-start mb-6">
+                    <i class="fas fa-network-wired text-3xl accent-text"></i>
+                    <div class="flex flex-wrap gap-1 justify-end">
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">Kafka</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">Java</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Distributed Testing Framework</h3>
+                <ul class="text-dim text-xs space-y-3 mb-6 flex-grow">
+                    <li>• Designed a queue-based, pull-based distributed framework to execute test scenarios concurrently across multiple client nodes.</li>
+                    <li>• Engineered high availability and fault tolerance for robust, parallel test execution in distributed environments.</li>
+                    <li>• Utilized messaging queues for efficient task distribution, optimizing resource utilization and scalability.</li>
+                </ul>
+                <div class="pt-4 border-t border-slate-800">
+                    <p class="text-[10px] font-bold accent-text uppercase tracking-widest">Fault Tolerance • Scalability</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/20 p-8 rounded-xl border border-slate-800 hover:accent-border transition-all flex flex-col" data-aos="zoom-in" data-aos-delay="100">
+                <div class="flex justify-between items-start mb-6">
+                    <i class="fas fa-robot text-3xl accent-text"></i>
+                    <div class="flex flex-wrap gap-1 justify-end">
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">Selenium</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">Appium</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Automation Testing Framework</h3>
+                <ul class="text-dim text-xs space-y-3 mb-6 flex-grow">
+                    <li>• Led design of a modular Java-TestNG suite supporting UI (Selenium, Playwright), API (REST Assured), and Mobile (Appium).</li>
+                    <li>• Integrated seamless CI/CD pipelines with detailed reporting and parallel execution capabilities.</li>
+                    <li>• Developed custom Java utilities to automate repetitive tasks, cutting execution time and improving team efficiency.</li>
+                </ul>
+                <div class="pt-4 border-t border-slate-800">
+                    <p class="text-[10px] font-bold accent-text uppercase tracking-widest">CI/CD • Unified Validation</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/20 p-8 rounded-xl border border-slate-800 hover:accent-border transition-all flex flex-col" data-aos="zoom-in" data-aos-delay="200">
+                <div class="flex justify-between items-start mb-6">
+                    <i class="fas fa-microchip text-3xl accent-text"></i>
+                    <div class="flex flex-wrap gap-1 justify-end">
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">Python</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-slate-900 rounded border border-slate-700">NLP</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 mb-2">
+                    <h3 class="text-xl font-bold">IoT Smart Bin</h3>
+                    <span class="text-[10px] font-bold bg-orange-500/20 text-orange-500 px-2 py-0.5 rounded">Silver Medal</span>
+                </div>
+                <ul class="text-dim text-xs space-y-3 mb-6 flex-grow">
+                    <li>• Developed a voice-controlled bin utilizing NLP (Naive Bayes, HMMs) and Python on Raspberry Pi.</li>
+                    <li>• Features real-time fill-level monitoring and automated alerts to sanitation authorities.</li>
+                    <li>• Concept published by Intellectual Property India and incubated by IIEC-IPEC.</li>
+                </ul>
+                <div class="pt-4 border-t border-slate-800">
+                    <p class="text-[10px] font-bold accent-text uppercase tracking-widest">Raspberry Pi • Embedded NLP</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="education" class="py-24 px-6 bg-slate-900/10">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold mb-16 flex items-center gap-4" data-aos="fade-up">
+                <span class="accent-text">04.</span> Education
+                <div class="h-[1px] bg-slate-700 flex-grow"></div>
+            </h2>
+            <div class="space-y-12">
+                <div class="border-l-2 accent-border pl-8" data-aos="fade-left">
+                    <h3 class="text-xl font-bold">B.Tech in Computer Science and Engineering</h3>
+                    <p class="accent-text font-medium">Inderprastha Engineering College, Ghaziabad</p>
+                    <p class="text-dim text-sm mt-1">Class of 2023 | CGPA: 8.39 / 10</p>
+                </div>
+                
+                <div class="border-l-2 accent-border pl-8 opacity-80" data-aos="fade-left" data-aos-delay="100">
+                    <h3 class="text-xl font-bold">Senior Secondary Examination (XII)</h3>
+                    <p class="accent-text font-medium">St. Joseph's School (CBSE), Sonbhadra</p>
+                    <p class="text-dim text-sm mt-1">Class of 2019 | Percentage: 75.16%</p>
+                </div>
+                
+                <div class="border-l-2 accent-border pl-8 opacity-70" data-aos="fade-left" data-aos-delay="200">
+                    <h3 class="text-xl font-bold">Higher Secondary Examination (X)</h3>
+                    <p class="accent-text font-medium">D.A.V. Sr. Sec. Public School (CBSE), Sonbhadra</p>
+                    <p class="text-dim text-sm mt-1">Class of 2017 | CGPA: 8.80 / 10</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="py-24 px-6 bg-slate-900/10">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-8 uppercase tracking-tighter">Get In Touch</h2>
+                    <div class="space-y-6 text-dim">
+                        <p class="flex items-center gap-4"><i class="fas fa-envelope accent-text"></i> singh09ayushkumar@gmail.com</p>
+                        <p class="flex items-center gap-4"><i class="fas fa-phone accent-text"></i> +91 9455963915</p>
+                        <p class="flex items-center gap-4"><i class="fas fa-map-marker-alt accent-text"></i> Noida, India</p>
+                        <div class="flex gap-8 text-2xl pt-6">
+                            <a href="https://github.com/PortReaper" target="_blank" class="cursor-hover hover:accent-text transition-all"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/ayush-kumar-singh-a40937188/" target="_blank" class="cursor-hover hover:accent-text transition-all"><i class="fab fa-linkedin"></i></a>
+			    <a href="https://www.instagram.com/ayush_the_one.90/" target="_blank" class="cursor-hover hover:accent-text transition-all"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form" class="space-y-4" data-aos="fade-left">
+                    <input type="text" placeholder="Full Name" required class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 text-white">
+                    <input type="email" placeholder="Email Address" required class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 text-white">
+                    <textarea rows="5" placeholder="Your Message" required class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 text-white"></textarea>
+                    <button type="submit" class="w-full accent-bg text-white font-bold py-4 rounded-lg cursor-hover hover:opacity-90 transition active:scale-95">SEND MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center border-t border-slate-900 bg-[#0a101f]">
+        <p class="text-slate-500 text-xs font-mono tracking-widest uppercase">Designed & Built by Ayush Kumar Singh © 2025</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+        const starCanvas = document.getElementById('starCanvas'), clickCanvas = document.getElementById('clickCanvas');
+        const sCtx = starCanvas.getContext('2d'), cCtx = clickCanvas.getContext('2d');
+        let stars = [], particles = [];
+
+        function init() {
+            starCanvas.width = clickCanvas.width = window.innerWidth;
+            starCanvas.height = clickCanvas.height = window.innerHeight;
+            stars = []; for(let i=0; i<150; i++) stars.push({ x: Math.random()*starCanvas.width, y: Math.random()*starCanvas.height, size: Math.random()*1.5, speed: Math.random()*0.3 });
+        }
+
+        function draw() {
+            sCtx.clearRect(0,0,starCanvas.width,starCanvas.height); sCtx.fillStyle = '#ffffff';
+            stars.forEach(s => { sCtx.beginPath(); sCtx.arc(s.x, s.y, s.size, 0, Math.PI*2); sCtx.fill(); s.y += s.speed; if(s.y > starCanvas.height) s.y = 0; });
+            cCtx.clearRect(0,0,clickCanvas.width,clickCanvas.height);
+            particles.forEach((p, i) => { p.x += p.vx; p.y += p.vy; p.alpha -= 0.02; if(p.alpha <= 0) particles.splice(i, 1); cCtx.fillStyle = `rgba(249, 115, 22, ${p.alpha})`; cCtx.beginPath(); cCtx.arc(p.x, p.y, p.size, 0, Math.PI*2); cCtx.fill(); });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('click', (e) => { for(let i=0; i<15; i++) particles.push({ x: e.clientX, y: e.clientY, vx: (Math.random()-0.5)*10, vy: (Math.random()-0.5)*10, size: Math.random()*3, alpha: 1 }); });
+
+        init(); draw(); window.addEventListener('resize', init);
+        function toggleTheme() { document.body.classList.toggle('light-theme'); }
+
+        const dot = document.getElementById('cursor-dot'), outline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => { dot.style.left = `${e.clientX}px`; dot.style.top = `${e.clientY}px`; setTimeout(() => { outline.style.left = `${e.clientX - 20}px`; outline.style.top = `${e.clientY - 20}px`; }, 50); });
+    </script>
 </body>
 </html>
