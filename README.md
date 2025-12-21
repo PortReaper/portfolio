@@ -1,6 +1,9 @@
 # Hi there, I'm Ayush Kumar Singh 👋 🚀
 **Software Development Engineer | Java Backend Specialist | Automation Architect**
 
+### 🐍 Contribution Snake
+![Snake Animation](https://raw.githubusercontent.com/PortReaper/PortReaper/output/github-contribution-grid-snake.svg)
+
 ---
 
 ### 👨‍💻 Professional Profile
