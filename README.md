@@ -38,17 +38,6 @@
 
 ---
 
-### 📊 Coding Activity & Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=PortReaper&show_icons=true&theme=tokyonight&count_private=true" alt="Ayush's Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=PortReaper&layout=compact&theme=tokyonight" alt="Top Languages" />
-</p>
-
-
-
----
-
 ### 📫 Connect with Me
 <p align="left">
 <a href="https://www.linkedin.com/in/ayush-kumar-singh-a40937188/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
